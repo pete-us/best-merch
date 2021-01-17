@@ -1,0 +1,7 @@
+<app-searchbar></app-searchbar>
+<div class="container">
+  <div class="row">
+    <app-categories ngClass="col" [selectedCategory]="currentCategory" (onCategoryChanged)="selectCategory($event)"></app-categories>
+    <app-products ngClass="col" [category]="currentCategory"></app-products>
+  </div>
+</div>

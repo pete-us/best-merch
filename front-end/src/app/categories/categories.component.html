@@ -1,0 +1,5 @@
+<div class="categories">
+    <div *ngFor="let category of categories">
+        <app-category-item [category]="category" [selectedCategory]="selectedCategory" (onItemSelected)="changeCategory($event)"></app-category-item>
+    </div>
+</div>
