@@ -1,41 +1,36 @@
 package fr.olympp.dojo.bestmerch.controllers;
 
 import fr.olympp.dojo.bestmerch.model.Category;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
+import fr.olympp.dojo.bestmerch.model.Product;
+import io.jsondb.JsonDBTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
-    private final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    private final JsonDBTemplate jsonDBTemplate = new JsonDBTemplate("src/main/resources/data",
+            "fr.olympp.dojo.bestmerch.model");
 
-    @GetMapping("/list")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Category>> listCategories() {
-        try (InputStreamReader isr = new InputStreamReader(new ClassPathResource("data/categories.txt").getInputStream())) {
-            try (BufferedReader br = new BufferedReader(isr)) {
-                List<Category> categories = new ArrayList<>();
-                String categoryName;
-                while ((categoryName = br.readLine()) != null) {
-                    categories.add(new Category.Builder().name(categoryName).build());
-                }
-                return new ResponseEntity<>(categories, HttpStatus.OK);
-            }
-        } catch (IOException e) {
-            logger.error(e.getLocalizedMessage(), e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        List<Category> categories = jsonDBTemplate.getCollection(Category.class);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    @GetMapping("/{category}")
+    @ResponseBody
+    public ResponseEntity<List<Product>> listProductsForCategory(@PathVariable String category) {
+        List<Product> products = jsonDBTemplate.getCollection(Product.class).stream()
+                .filter(product -> category.equals(product.getCategory().getName()))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

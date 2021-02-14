@@ -1,27 +1,12 @@
 package fr.olympp.dojo.bestmerch.model;
 
+import io.jsondb.annotation.Document;
+import io.jsondb.annotation.Id;
+
+@Document(collection = "categories", schemaVersion = "1.0")
 public class Category {
-
-    public static class Builder {
-        private String name;
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Category build() {
-            Category category = new Category();
-            category.setName(this.name);
-            return category;
-        }
-    }
-
+    @Id
     private String name;
-
-    private Category() {
-        // Use the builder to create an instance
-    }
 
     public String getName() {
         return name;

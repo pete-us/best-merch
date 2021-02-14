@@ -1,1 +1,1 @@
-<div [ngClass]="{ category: category, selected: isSelected }" (click)="onSelect()">{{category.name}}</div>
+<a [ngClass]="{ navlink: true, active: isSelected }" href="#" (click)="onSelect()"><span>{{category.name}}</span></a>

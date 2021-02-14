@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-searchbar',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./searchbar.component.scss']
 })
 export class SearchbarComponent {
+  @Input()
+  responsiveMode = false;
 }

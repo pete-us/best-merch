@@ -1,5 +1,5 @@
-<div class="categories">
-    <div *ngFor="let category of categories">
-        <app-category-item [category]="category" [selectedCategory]="selectedCategory" (onItemSelected)="changeCategory($event)"></app-category-item>
-    </div>
-</div>
+<ul class="nav navbar-nav text-light categories" id="accordionSidebar">
+    <li class="nav-item" *ngFor="let category of categories">
+        <app-category-item class="nav-link" [category]="category" [selectedCategory]="selectedCategory" (onItemSelected)="changeCategory($event)"></app-category-item>
+    </li>
+</ul>

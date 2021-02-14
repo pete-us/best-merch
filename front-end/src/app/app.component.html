@@ -1,7 +1,21 @@
-<app-searchbar></app-searchbar>
-<div class="container">
-  <div class="row">
-    <app-categories ngClass="col" [selectedCategory]="currentCategory" (onCategoryChanged)="selectCategory($event)"></app-categories>
-    <app-products ngClass="col" [category]="currentCategory"></app-products>
+<div id="page-top">
+  <div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+      style="background-color: #F90093;background-image: url(&quot;none&quot;);">
+      <div class="container-fluid d-flex flex-column p-0">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#" style="height: 100px;">
+          <img class="img-fluid" src="assets/img/Logo.png?h=e6a87fb362b939e239685cf1bda211be">
+        </a>
+        <hr class="sidebar-divider my-0">
+        <app-categories class="container-fluid d-flex" [selectedCategory]="currentCategory" (onCategoryChanged)="selectCategory($event)">
+        </app-categories>
+      </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+      <div id="content">
+        <app-headerbar></app-headerbar>
+        <app-products [category]="currentCategory"></app-products>
+      </div>
+    </div>
   </div>
 </div>

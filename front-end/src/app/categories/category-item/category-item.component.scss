@@ -1,5 +1,8 @@
-.category {
-    &.selected {
-        font-weight: bold;
+a.navlink {
+    color: rgb(248, 249, 252);
+    font-size: .85rem;
+    &.active {
+        color: rgb(255, 255, 255);
+        font-weight: 700;
     }
 }
